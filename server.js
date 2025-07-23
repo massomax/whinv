@@ -9,7 +9,10 @@ const productRoutes = require("./routes/productRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const reportRoutes = require("./routes/reportRoutes");
 const logRoutes = require("./routes/logRoutes");
+const { startBot } = require('./bot');
 
+
+startBot();
 const app = express();
 app.use(express.json());
 app.use((req, res, next) => {
