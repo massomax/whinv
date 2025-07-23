@@ -12,22 +12,7 @@ const logRoutes = require("./routes/logRoutes");
 
 const app = express();
 app.use(express.json());
-app.use(
-  cors({
-    origin: "https://wh-client-one.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true, // если передаёте куки/HTTP-only токены
-  })
-);
-
-app.options(
-  "*",
-  cors({
-    origin: "https://wh-client-one.vercel.app",
-    credentials: true,
-  })
-);
+app.use(require("cors")());
 
 mongoose
   .connect(
