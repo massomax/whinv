@@ -14,13 +14,14 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: true, // отражает любой Origin из запроса
+    origin: true, // отражает любой Origin
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "*"],
-    credentials: true, // если передаёте куки/HTTP-only токены
+    credentials: true, // если нужны куки/credentials
   })
 );
 
+// 3) Явно отвечаем на preflight любым HTTP OK
 app.options("*", cors());
 
 mongoose
