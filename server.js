@@ -12,16 +12,24 @@ const logRoutes = require("./routes/logRoutes");
 
 const app = express();
 app.use(express.json());
-app.use(
-  cors({
-    origin: true, // отражает любой Origin
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization", "*"],
-    credentials: true, // если нужны куки/credentials
-  })
-);
+app.use((req, res, next) => {
+  // Разрешаем любой Origin
+  res.header("Access-Control-Allow-Origin", "*");
+  // Разрешаем любые методы
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS"
+  );
+  // Разрешаем любые заголовки
+  res.header("Access-Control-Allow-Headers", "*");
 
-// 3) Явно отвечаем на preflight любым HTTP OK
+  // Если это preflight-запрос — сразу высылаем HTTP 200
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+
+  next();
+});
 app.options("*", cors());
 
 mongoose
