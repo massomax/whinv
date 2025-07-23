@@ -12,7 +12,16 @@ const logRoutes = require("./routes/logRoutes");
 
 const app = express();
 app.use(express.json());
-app.use(require("cors")());
+app.use(
+  cors({
+    origin: true, // отражает любой Origin из запроса
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "*"],
+    credentials: true, // если передаёте куки/HTTP-only токены
+  })
+);
+
+app.options("*", cors());
 
 mongoose
   .connect(
