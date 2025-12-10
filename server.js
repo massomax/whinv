@@ -37,7 +37,7 @@ app.options("*", cors());
 
 mongoose
   .connect(
-    "mongodb+srv://massocode:WwA5UXZdOkSUcLEh@cluster0.84rdk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+    process.env.MONGO_URL,
     {}
   )
   .then(() => console.log("MongoDB connected"))
