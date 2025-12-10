@@ -1,4 +1,3 @@
-// bot.js
 require("dotenv").config();
 const { Bot } = require("grammy");
 
